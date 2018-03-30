@@ -25,11 +25,6 @@ def conn_test():
 		mes.showinfo("提示","连接成功")
 
 
-	# answer = mes.askyesno("问卷小调查", "你喜欢这个工具吗？\n您的选择是：")
-	# if answer is True:
-	# 	mes.showinfo('谢谢参与', '您选择了“是”，谢谢参与！')
-	# else:
-	# 	mes.showinfo('谢谢参与', '您选择了“否”，谢谢参与！')
 
 def hz_channelorder():
 	showbill_hz.delete(1.0,"end")
