@@ -4,10 +4,10 @@
 This is Tools for Customer Relation System
 ```
 ### main function
-- [x] Cannel order
+- [x] Cancel order
 - [x] Finish order
-- [x] Send emile lightly
-- [X] Dump data
+- [x] Send email lightly
+- [X] Export data
 - [x] Monitor abnormal order
 - [X] help document
 ***
