@@ -22,8 +22,15 @@ def conn_test():
 	except pyodbc.InterfaceError as reason:
 		mes.showerror("错误提示","数据连接失败,原因是:%s" % str(reason))
 	else:
-		mes.showinfo("提示","连接成功")
+		mes.showinfo("连接提示","连接成功")
 
+
+#选择模式
+def model_select(func):
+	global mo
+	mo=model.get()
+	return func
+		
 
 
 def hz_channelorder():
@@ -42,9 +49,9 @@ def hz_channelorder():
 	cd=str(t_hz.get("1.0","end"))
 	cd=cd.strip()
 	if cd == '':
-		mes.showerror("贴心小提示","未输入单号")
+		mes.showerror("系统提示","未输入单号")
 	else:
-		answer=mes.askyesno('tips','确定撤单吗？不要冲动，看清楚再点！')
+		answer=mes.askyesno('tips','是否确定撤单？')
 		if answer is False:
 			pass
 		else:
@@ -92,22 +99,23 @@ def hz_channelorder():
 		cur.close()
 		conn.close()
 #####浩优撤单######
+@model_select
 def hy_channelorder():
 	showbill.delete(1.0,"end")
 	#mes.showinfo("浩优撤单","敬请期待")
-	model_select()
+	#model_select()
 	#正式库
 	con=pyodbc.connect(r'DRIVER={SQL Server};SERVER=localhost;DATABASE=S60_MAIN;UID=chan;PWD=password')
 	curo=con.cursor()
 	if mo == '':
-		mes.showwarning("贴心小提示", "请选择模式")
+		mes.showwarning("系统提示", "请选择模式")
 	elif mo == 'a':
 		cd=str(t.get("1.0","end"))
 		cd=cd.strip()
 		if cd == '':
-			mes.showerror("贴心小提示","未输入单号")
+			mes.showerror("系统提示","未输入单号")
 		else:
-			answer = mes.askyesno('浩优操作tips', '确定撤单吗？不要冲动，看清楚再点！')
+			answer = mes.askyesno('浩优操作tips', '是否确定撤单？')
 			if answer is False:
 				pass
 			else:
@@ -142,9 +150,9 @@ def hy_channelorder():
 		cd=str(t.get("1.0","end"))
 		cd=cd.strip()
 		if cd == '':
-			mes.showerror("贴心小提示","未输入单号")
+			mes.showerror("系统提示","未输入单号")
 		else:
-			answer = mes.askyesno('浩优操作tips', '确定撤单吗？不要冲动，看清楚再点！')
+			answer = mes.askyesno('浩优操作tips', '是否确定撤单？')
 			if answer is False:
 				pass
 			else:
@@ -185,7 +193,7 @@ def hz_finishorder():
 	if HZ_billno=='':
 		mes.showerror("错误提示","未输入单号！！")
 	else:
-		answer = mes.askyesno('tips', '确定结单吗？不要冲动，看清楚再点！')
+		answer = mes.askyesno('tips', '是否确定结单？')
 		if answer is False:
 			pass
 		else:
@@ -238,21 +246,22 @@ def hz_finishorder():
 
 
 # @model_select #hy_finishorder=model_select(model_select)
+@model_select
 def hy_finishorder():
 	showbill.delete(1.0, "end")
-	model_select()
+	#model_select()
 	# 正式库
 	con = pyodbc.connect(r'DRIVER={SQL Server};SERVER=localhost;DATABASE=S60_MAIN;UID=chan;PWD=password')
 	curo = con.cursor()
 	if mo == '':
-		mes.showwarning("贴心小提示", "请选择模式")
+		mes.showwarning("系统提示", "请选择模式")
 	elif mo == 'a':
 		cd = str(t.get("1.0", "end"))
 		cd = cd.strip()
 		if cd == '':
-			mes.showerror("贴心小提示", "未输入单号")
+			mes.showerror("系统提示", "未输入单号")
 		else:
-			answer = mes.askyesno('浩优结单tips', '确定结单吗？不要冲动，看清楚再点！')
+			answer = mes.askyesno('浩优结单tips', '是否确定结单？')
 			if answer is False:
 				pass
 			else:
@@ -276,7 +285,7 @@ def hy_finishorder():
 							print_info(info)
 							save_log(info)
 						else:
-							update_sql = "update mx_repair set billstate=130000008,remark=remark+'小工具结单' where billno='%s'" % str(billno)
+							update_sql = "update mx_repair set billstate=130000008,remark=remark+'tools结单' where billno='%s'" % str(billno)
 							# app不需要我们结单
 							# update_sql2 = "update Family_Base_Service_Order set CRMCheck=110000006,CRMRemark=CRMRemark+'小工具撤单' where CRMID='%s'" % str(billno)
 							curo.execute(update_sql)
@@ -290,9 +299,9 @@ def hy_finishorder():
 		cd = str(t.get("1.0", "end"))
 		cd = cd.strip()
 		if cd == '':
-			mes.showerror("贴心小提示", "未输入单号")
+			mes.showerror("系统提示", "未输入单号")
 		else:
-			answer = mes.askyesno('浩优操作tips', '确定结单吗？不要冲动，看清楚再点！')
+			answer = mes.askyesno('浩优操作tips', '是否确定结单？')
 			if answer is False:
 				pass
 			else:
@@ -314,7 +323,7 @@ def hy_finishorder():
 							print_info(info)
 							save_log(info)
 						else:
-							update_sql = "update mx_repair set billstate=130000008,remark=remark+'小工具结单' where billno='%s'" % str(billno)
+							update_sql = "update mx_repair set billstate=130000008,remark=remark+'tools结单' where billno='%s'" % str(billno)
 							# update_sql2 = "update Family_Base_Service_Order set CRMCheck=110000006 where CRMID='%s'" % str(billno)
 							curo.execute(update_sql)
 							# curo.execute(update_sql2)
@@ -670,7 +679,7 @@ def dumpexecl(final_sql):
 		sqlinfo="\n" + '出错语句：' + final_sql +"\n"
 		save_sqllog(sqlinfo)
 	else:
-		###若数量很庞大，限制导出
+		###若数量大于5000，限制导出
 		if len(rows) >= 5000:
 			mes.showerror("错误提示","导出数据数量大于5000，禁止导出,请联系管理员")
 		else:
@@ -960,6 +969,7 @@ def restart():
 	os.system("python.exe D:/CRMTOOL/cdd.py")
 #####淘宝链接######
 def taobao_link():
+# 	url='http://'
 	url="https://yingxism.tmall.com/?spm=a220o.1000855.1997427721.d4918089.90ebce3OjTBZA"
 	webbrowser.open(url)
 def tools_link():
@@ -968,12 +978,12 @@ def tools_link():
 	webbrowser.open(url)
 def openfile_log():
 	try:
-		os.system("start D:/CRMTOOL/log/CRMlog.txt")
+		os.system("start log/CRMlog.txt")
 	except OSError:
 		mes.showerror("错误提示","未找到CRMlog文件")
 #####
 def openfile_sqllog():
-	os.system("start D:/CRMTOOL/log")
+	os.system("start log")
 #####菜单功能实现######
 def msgBox1():  
 	mes.showinfo('系统版本','当前版本:CrmTools_2.0.0')
@@ -1134,8 +1144,26 @@ b4.pack(side=tk.RIGHT)
 canvas_3=tk.Canvas(tab3,height=585,width=580)
 canvas_3.pack()
 #canvas_3.create_rectangle(0,0,580,585,fill="white")
-img_3=tk.PhotoImage(file="D:/CRMTOOL/email1.png")
-canvas_3.create_image(0,0,anchor=tk.NW,image=img_3)
+img_3=tk.PhotoImage(file="image/email1.png")
+canvas_3.create_image(0,200,anchor=tk.NW,image=img_3)
+canvas_3.create_rectangle(0,0,580,200,fill="#FFF")
+canvas_3.create_text(290,35,text="ETL脚本文件",fill='black',font=('Comic Sans MS',25))
+canvas_3.create_rectangle(0,0,6,200,fill="skyblue")
+canvas_3.create_rectangle(0,0,580,6,fill="skyblue")
+canvas_3.create_rectangle(576,0,580,200,fill="skyblue")
+canvas_3.create_rectangle(0,196,580,200,fill="skyblue")
+bat_1=tk.Button(tab3,text='浩泽报表',width=12,fg='#999',bg='Gold',activebackground='#00F',command=lambda: os.system("call ETLbat/OznerReport.bat"))
+bat_1.place(x=100,y=100)
+bat_2=tk.Button(tab3,text='财务数据',width=12,fg='#999',bg='Gold',activebackground='#00F',command=lambda: os.system("call ETLbat/FinanceData.bat"))
+bat_2.place(x=250,y=100)
+bat_3=tk.Button(tab3,text='水芯片',width=12,fg='#999',bg='Gold',activebackground='#00F',command=lambda: os.system("call ETLbat/SXP.bat"))
+bat_3.place(x=400,y=100)
+bat_4=tk.Button(tab3,text='每月五号',width=12,fg='#999',bg='Gold',activebackground='#00F',command=lambda: os.system("call ETLbat/FiveDay.bat"))
+bat_4.place(x=100,y=150)
+bat_5=tk.Button(tab3,text='清理数据',width=12,fg='#999',bg='Gold',activebackground='#00F',command=lambda: os.system("call ETLbat/clean.bat"))
+bat_5.place(x=250,y=150)
+bat_6=tk.Button(tab3,text='重启电脑',width=12,fg='#999',bg='Gold',activebackground='#00F',command=lambda: os.system("call ETLbat/Restart.bat"))
+bat_6.place(x=400,y=150)
 ###########单据替换###########
 la_2=tk.Label(tab4,text="单据替换",fg='blue',font=("Symbol", "15"))
 la_2.pack()
