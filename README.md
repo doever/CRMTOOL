@@ -21,4 +21,6 @@ This's Tools for Customer Relation System
 下载安装(sqlncli.msi)。建议选择与远程数据库版本相对应的Native Client。如果本地安装的Native Client是高版本，则DRIVER={SQL Server Native Client 11.0}需要填写的是本地的高版本。  
 找到对应的DRIVER，按此DRIVER设置pyodbc的connect的DRIVER  
 方法：控制面板-管理工具-数据源odbc-系统DSN--点击添加即可查看安装的数据源名称，即为pyodbc.connect的DRIVER
-<br/>其它模块直接pip即可</br>
+<br/>其它模块直接pip即可</br>  
+![首页](DemoImage/homePage.png)
+![监控](DemoImage/abnormalOrder.png)
