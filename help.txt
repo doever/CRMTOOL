@@ -1,0 +1,2 @@
+1.git相关操作
+	git add filename
