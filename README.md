@@ -11,8 +11,6 @@ This's Tools for Customer Relation System
 - [x] Monitor abnormal order
 - [X] help document
 ***
-### myblog
-[visit it now!](http://www.cnblogs.com/chilo/)
 ***
 ## 注意事项
 
