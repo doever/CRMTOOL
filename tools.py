@@ -1,21 +1,24 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
-import tkinter as tk
-import pyodbc
-from tkinter import messagebox as mes
+
 import re
 import os
+import json
 import datetime
+import tkinter as tk
+from tkinter import messagebox as mes
 from tkinter import ttk
+
+import pyodbc
 import webbrowser
 import xlsxwriter
 import requests
-import json
+
 
 
 ####浩泽撤单####
 
-# 未try catch
+
 def conn_test():
     try:
         conn = pyodbc.connect(r'DRIVER={SQL Server};SERVER=localhost;DATABASE=testok;UID=test;PWD=test')
@@ -27,14 +30,6 @@ def conn_test():
     else:
         mes.showinfo("提示", "连接成功")
 
-
-# 选择模式,用作装饰器
-#出错原因，装饰器运行时无法找到model，与python执行顺序有关
-# def model_select(func):
-#     global mo
-#     mo=''
-#     mo = model.get()
-#     return func
 
 
 def hz_channelorder():
