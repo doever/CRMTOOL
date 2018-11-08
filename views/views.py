@@ -5,8 +5,9 @@ from setting import *
 
 
 class BaseView:
-    def __init__(self, menu_name: dict):
-        pass
+    # def __init__(self, menu_name: dict):
+    def __init__(self, tab_control):
+        self.tab = ttk.Frame(tab_control)
 
 
 class MainView():
@@ -41,18 +42,18 @@ class IndexView:
 
 class HZCancelView:
     def init_ui(self, tab_control):
-        tab1 = ttk.Frame(tab_control)
-        tab_control.add(tab1, text=MENU_NAME['page_two'])
-        la_hz = tk.Label(tab1, text="浩  泽", fg='blue', font=("Symbol", "15"))
-        la_hz.pack()
-        tk.Label(tab1, text='----------------------------------------------------------------------', font=('', 10)).pack()
-        la1_hz = tk.Label(tab1, text="注:请输入XX000000-0000格式的单号", fg='DeepPink', font=("Comic Sans MS", "8"))
-        la1_hz.pack()
-        tk.Label(tab1, text='-----------开户退换单据撤单请注意同时作废浩优以及WMS单据--------------', fg='DeepPink', font=("Comic Sans MS", "8")).pack()
-        t_hz = tk.Text(tab1, height=20, width=80)
-        t_hz.pack()
-        showbill_hz = tk.Text(tab1, height=15, width=80)
-        showbill_hz.pack()
+        tab = ttk.Frame(tab_control)
+        tab_control.add(tab, text=MENU_NAME['page_two'])
+        l_title = tk.Label(tab, text="浩  泽", fg='blue', font=("Symbol", "15"))
+        l_title.pack()
+        tk.Label(tab, text='----------------------------------------------------------------------', font=('', 10)).pack()
+        l_warning = tk.Label(tab, text="注:请输入XX000000-0000格式的单号", fg='DeepPink', font=("Comic Sans MS", "8"))
+        l_warning.pack()
+        tk.Label(tab, text='-----------开户退换单据撤单请注意同时作废浩优以及WMS单据--------------', fg='DeepPink', font=("Comic Sans MS", "8")).pack()
+        t_workarea = tk.Text(tab, height=20, width=80)
+        t_workarea.pack()
+        t_showarea = tk.Text(tab, height=15, width=80)
+        t_showarea.pack()
         # Text颜色实现
         '''
         #第一个参数为自定义标签的名字
@@ -62,14 +63,34 @@ class HZCancelView:
         #用tag_config函数来设置标签的属性
         showbill.tag_config('tag1',background='LightCyan',foreground='red')
         '''
-        b1 = tk.Button(tab1, text='浩泽撤单', activebackground='blue', activeforeground='Black', bg='PaleTurquoise', fg='black', command=hz_channelorder)
-        b1.pack(side=tk.LEFT)
-        b = tk.Button(tab1, text='浩泽结单', activebackground='blue', activeforeground='Black', bg='PaleTurquoise', fg='black', command=hz_finishorder)
-        b.pack(side=tk.RIGHT)
+        b_cancel = tk.Button(tab, text='浩泽撤单', activebackground='blue', activeforeground='Black', bg='PaleTurquoise', fg='black', command=hz_channelorder)
+        b_cancel.pack(side=tk.LEFT)
+        b_cancel.bind()
+        b_finish = tk.Button(tab, text='浩泽结单', activebackground='blue', activeforeground='Black', bg='PaleTurquoise', fg='black', command=hz_finishorder)
+        b_finish.pack(side=tk.RIGHT)
 
 
 class HYCancelView():
-    pass
+    def init_ui(self, tab_contral):
+        tab = ttk.Frame(tab_contral)
+        tab_contral.add(tab, text=MENU_NAME['page_three'])
+        l_title = tk.Label(tab, text="灏  优", fg='blue', font=("Symbol", "15"))
+        l_title.pack()
+        l_warning = tk.Label(tab, text="注:浩优单据需选择模式,模式一对应尾数4位数单据,模式二对应尾数5位数单据,请勿混用", fg='DeepPink', font=("Comic Sans MS", "8"))
+        l_warning.pack()
+        model = tk.StringVar()
+        tk.Radiobutton(tab, text='模式1:GD000000-0000 ', variable=model, value='a', command=model_select, font=('', 10)).pack()
+        tk.Radiobutton(tab, text='模式2:GD000000-00000', variable=model, value='b', command=model_select, font=('', 10)).pack()
+        t_workarea = tk.Text(tab, height=20, width=80)
+        t_workarea.pack()
+        t_showarea = tk.Text(tab, height=15, width=80)
+        t_showarea.pack()
+        b_cancel = tk.Button(tab, text='浩优撤单', activebackground='yellow', activeforeground='Black', bg='BlanchedAlmond', fg='black',
+                       command=hy_channelorder)
+        b_cancel.pack(side=tk.LEFT)
+        b_finish = tk.Button(tab, text='浩优结单', activebackground='yellow', activeforeground='Black', bg='BlanchedAlmond', fg='black',
+                       command=hy_finishorder)
+        b_finish.pack(side=tk.RIGHT)
 
 
 class EamilTaskView():
