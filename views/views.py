@@ -10,7 +10,7 @@ class BaseView:
         self.tab = ttk.Frame(tab_control)
 
 
-class MainView():
+class MainView:
     def init_ui(self, title: str):
         top = tk.Tk()
         top.title(title)
@@ -71,9 +71,9 @@ class HZCancelView:
 
 
 class HYCancelView():
-    def init_ui(self, tab_contral):
-        tab = ttk.Frame(tab_contral)
-        tab_contral.add(tab, text=MENU_NAME['page_three'])
+    def init_ui(self, tab_control):
+        tab = ttk.Frame(tab_control)
+        tab_control.add(tab, text=MENU_NAME['page_three'])
         l_title = tk.Label(tab, text="灏  优", fg='blue', font=("Symbol", "15"))
         l_title.pack()
         l_warning = tk.Label(tab, text="注:浩优单据需选择模式,模式一对应尾数4位数单据,模式二对应尾数5位数单据,请勿混用", fg='DeepPink', font=("Comic Sans MS", "8"))
@@ -94,7 +94,37 @@ class HYCancelView():
 
 
 class EamilTaskView():
-    pass
+    def init_ui(self, tab_control):
+        tab = ttk.Frame(tab_control)
+        canvas_email = tk.Canvas(tab, height=585, width=580)
+        canvas_email.pack()
+        # canvas_email.create_rectangle(0,0,580,585,fill="white")
+        email_background = tk.PhotoImage(file="image/email1.png")
+        canvas_email.create_image(0, 200, anchor=tk.NW, image=email_background)
+        canvas_email.create_rectangle(0, 0, 580, 200, fill="#FFF")
+        canvas_email.create_text(290, 35, text="ETL脚本文件", fill='black', font=('Comic Sans MS', 25))
+        canvas_email.create_rectangle(0, 0, 6, 200, fill="skyblue")
+        canvas_email.create_rectangle(0, 0, 580, 6, fill="skyblue")
+        canvas_email.create_rectangle(576, 0, 580, 200, fill="skyblue")
+        canvas_email.create_rectangle(0, 196, 580, 200, fill="skyblue")
+        b_hz_report = tk.Button(tab, text='浩泽报表', width=12, fg='#999', bg='Gold', activebackground='#00F',
+                          command=lambda: os.system("call ETLbat/OznerReport.bat"))
+        b_hz_report.place(x=100, y=100)
+        b_financial = tk.Button(tab, text='财务数据', width=12, fg='#999', bg='Gold', activebackground='#00F',
+                          command=lambda: os.system("call ETLbat/FinanceData.bat"))
+        b_financial.place(x=250, y=100)
+        b_water_chip = tk.Button(tab, text='水芯片', width=12, fg='#999', bg='Gold', activebackground='#00F', command=lambda: os.system("call ETLbat/SXP.bat"))
+        b_water_chip.place(x=400, y=100)
+        b_five_day = tk.Button(tab, text='每月五号', width=12, fg='#999', bg='Gold', activebackground='#00F',
+                          command=lambda: os.system("call ETLbat/FiveDay.bat"))
+        b_five_day.place(x=100, y=150)
+        b_clear = tk.Button(tab, text='清理数据', width=12, fg='#999', bg='Gold', activebackground='#00F',
+                          command=lambda: os.system("call ETLbat/clean.bat"))
+        b_clear.place(x=250, y=150)
+        b_reboot = tk.Button(tab, text='重启电脑', width=12, fg='#999', bg='Gold', activebackground='#00F',
+                          command=lambda: os.system("call ETLbat/Restart.bat"))
+        b_reboot.place(x=400, y=150)
+        # bat_2=tk.Button(tab3,text='',width=8,fg='red',activebackground='green',command=lambda: foo(x))
 
 
 class ReplaceView():
