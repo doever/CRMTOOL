@@ -128,7 +128,24 @@ class EamilTaskView():
 
 
 class ReplaceView():
-    pass
+    def init_ui(self, tab_control):
+        tab = ttk.Frame(tab_control)
+        l_replace = tk.Label(tab, text="单据替换", fg='blue', font=("Symbol", "15"))
+        l_replace.pack()
+        l_remark = tk.Label(tab, text="注：模式一用于XX111111-1111格式", font=("Times", "8", "bold italic"), fg="red")
+        l_remark.pack()
+        l_remark_t = tk.Label(tab, text="注：模式二用于XX111111-11111格式", font=("Times", "8", "bold italic"), fg="red")
+        l_remark_t.pack()
+        # 模式选择
+        replace_type = tk.StringVar()
+        tk.Radiobutton(tab, text='模式一', variable=replace_type, value='a', command=model_select_2, font=('', 8)).pack(side=tk.TOP)
+        tk.Radiobutton(tab, text='模式二', variable=replace_type, value='b', command=model_select_2, font=('', 8)).pack(side=tk.TOP)
+        t_in_area = tk.Text(tab, height=15, width=80)
+        t_in_area.pack()
+        t_out_area = tk.Text(tab, height=15, width=80)
+        t_out_area.pack()
+        b_replace = tk.Button(tab, text='替换', width=8, fg='red', activebackground='green', command=changetext)
+        b_replace.pack()
 
 
 class DumpDataView():
