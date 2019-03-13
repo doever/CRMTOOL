@@ -149,7 +149,8 @@ class ReplaceView():
 
 
 class DumpDataView():
-    pass
+   def init_ui():
+        pass
 
 
 class AbnormalOrderView():
