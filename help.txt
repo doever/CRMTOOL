@@ -1,6 +1,0 @@
-1.git相关操作
-	git add filename
-<<<<<<< HEAD
-	git checkout -b br1  快速创建并切换分支
-	git branch br1
-	git checkout br1
